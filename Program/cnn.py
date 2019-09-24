@@ -46,7 +46,7 @@ def load_data(micName, IMG_SIZE_X, IMG_SIZE_Y):
               images_array[i] = img_array
               i = i + 1;
 
-    return images_array[0:1500], labels_array[0:1500], images_array[1501:2056], labels_array[1501:2056];
+    return images_array[1:2056], labels_array[1:2056], images_array[0:2056:2], labels_array[0:2056:2];
 
 
 def check_array(x):
@@ -56,7 +56,7 @@ def check_array(x):
     except:
         return False
 
-x_train, y_train,x_test, y_test = load_data("mic0", IMG_SIZE_X, IMG_SIZE_Y)
+x_train, y_train, x_test, y_test = load_data("mic0", IMG_SIZE_X, IMG_SIZE_Y)
 x_train, x_test = x_train / 255.0, x_test / 255.0
 
 model = tf.keras.models.Sequential([
