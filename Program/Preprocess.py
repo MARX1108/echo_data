@@ -13,6 +13,16 @@ mic0 = vals[::2]
 mic1 = vals[1::2]
 dict[0] = f.name;
 
+a = np.empty((2,2,2), dtype=float, order='C')
+b = np.ones((2,2), dtype=float, order='C')
 
-print(dict)
+
+print(b.shape)
+print(a.shape)
+print(a)
+print(b)
+#np.append(a, b)
+a[0] = b
+a[1] = b
+print(a)
 
