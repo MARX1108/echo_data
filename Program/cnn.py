@@ -1,6 +1,6 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 
 import tensorflow as tf
-tf.enable_eager_execution()
-tf.__version__
+print (tf.compat.v1.enable_eager_execution)
+print (tf.__version__)
 
