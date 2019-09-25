@@ -7,20 +7,25 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-IMG_SIZE_X = 656//2
-IMG_SIZE_Y = 875//2
+IMG_SIZE_X = 65
+IMG_SIZE_Y = 87
 
 def load_data(micName, IMG_SIZE_X, IMG_SIZE_Y):
     this_path = os.getcwd()
     #print(this_path)
-
     filePath =  this_path + "/Fig/" + micName
     folderList = os.listdir(filePath)
     #print(fileList)
-    
+    dataset_size = 0;
+    for folder in folderList:
+        folderPath = filePath + "/" + folder
+        picList = os.listdir(folderPath)
+        picList = [k for k in picList if '.jpg' in k]
+        dataset_size = dataset_size + len(picList)
+        
 
-    images_array = np.empty((1082+974,IMG_SIZE_X,IMG_SIZE_Y,3), dtype=float, order='C')
-    labels_array = np.empty((1082+974,1), dtype=float, order='C')
+    images_array = np.empty((dataset_size,IMG_SIZE_X,IMG_SIZE_Y,3), dtype=float, order='C')
+    labels_array = np.empty((dataset_size,1), dtype=float, order='C')
     labels_array[0:1081] = 4
     labels_array[1082:1082+974] = 5
     #print(images_array)
