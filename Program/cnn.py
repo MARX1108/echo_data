@@ -6,9 +6,20 @@ import os
 import cv2 
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.image import imread
+from PIL import Image
 
-IMG_SIZE_X = 65
-IMG_SIZE_Y = 87
+IMG_SIZE_X = 656
+IMG_SIZE_Y = 875
+
+
+
+
+def load_image( infilename ) :
+    img = Image.open( infilename )
+    img.load()
+    data = np.asarray( img, dtype="int32" )
+    return data
 
 def load_data(micName, IMG_SIZE_X, IMG_SIZE_Y):
     this_path = os.getcwd()
@@ -32,13 +43,21 @@ def load_data(micName, IMG_SIZE_X, IMG_SIZE_Y):
     label = 4
     for folder in folderList:
         folderPath = filePath + "/" + folder
+
         picList = os.listdir(folderPath)
         picList = [k for k in picList if '.jpg' in k]
         #print(picList)
         for pic in picList:
             
-            temp_array = cv2.imread(folderPath+"/"+pic)
+            """ if os.path.exists(folderPath+"/"+pic):
+                print("pass")
+            else:
+                print(folderPath+"/"+pic) """
 
+            #temp_array = cv2.imread(folderPath+"/"+pic)
+            temp_array = load_image(folderPath+"/"+pic)
+            print(temp_array)
+            #print(folderPath+"/"+pic)
             #print(folderPath+"/"+pic);
             #print(i);
             #print(pic);
@@ -47,7 +66,7 @@ def load_data(micName, IMG_SIZE_X, IMG_SIZE_Y):
             
         
             if (check_array(temp_array)):
-              temp_array = cv2.resize(temp_array, (IMG_SIZE_Y, IMG_SIZE_X))
+              #temp_array = cv2.resize(temp_array, (IMG_SIZE_Y, IMG_SIZE_X))
               img_array = np.array(temp_array)
               images_array[i] = img_array
               #cv2.imshow("win", images_array[i])
@@ -59,13 +78,23 @@ def load_data(micName, IMG_SIZE_X, IMG_SIZE_Y):
     return images_array[1:2056], labels_array[1:2056], images_array[0:2056:2], labels_array[0:2056:2]
 
 
+
+
 def check_array(x):
     try:
         x.shape
         return True
     except:
-        print(x)
         return False
+
+
+
+
+str = os.getcwd() + "\Fig\mic0\echo5/0-static-977-2019y9m8d21h45m17s37.280242lat-80.474363long.jpg"
+open(str)
+print(str)
+image = load_image(str)
+
 
 x_train, y_train, x_test, y_test = load_data("mic0", IMG_SIZE_X, IMG_SIZE_Y)
 x_train, x_test = x_train / 255.0, x_test / 255.0
