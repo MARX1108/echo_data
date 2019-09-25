@@ -27,10 +27,7 @@ def load_data(micName, IMG_SIZE_X, IMG_SIZE_Y):
     images_array = np.empty((dataset_size,IMG_SIZE_X,IMG_SIZE_Y,3), dtype=float, order='C')
     labels_array = np.empty((dataset_size,1), dtype=float, order='C')
     
-      #labels_array[0:1081] = 4
-      #abels_array[1082:1082+974] = 5
-    #print(images_array)
-    #print(labels_array)
+
     i = 0
     label = 4
     for folder in folderList:
@@ -39,18 +36,24 @@ def load_data(micName, IMG_SIZE_X, IMG_SIZE_Y):
         picList = [k for k in picList if '.jpg' in k]
         #print(picList)
         for pic in picList:
+            
             temp_array = cv2.imread(folderPath+"/"+pic)
+
             #print(folderPath+"/"+pic);
             #print(i);
             #print(pic);
             #print(temp_array);
             #if (temp_array != None):
+            
+        
             if (check_array(temp_array)):
               temp_array = cv2.resize(temp_array, (IMG_SIZE_Y, IMG_SIZE_X))
               img_array = np.array(temp_array)
               images_array[i] = img_array
+              #cv2.imshow("win", images_array[i])
               labels_array[i] = label
-              i = i + 1
+              i += 1
+              
         label += 1
         
     return images_array[1:2056], labels_array[1:2056], images_array[0:2056:2], labels_array[0:2056:2]
@@ -61,6 +64,7 @@ def check_array(x):
         x.shape
         return True
     except:
+        print(x)
         return False
 
 x_train, y_train, x_test, y_test = load_data("mic0", IMG_SIZE_X, IMG_SIZE_Y)
