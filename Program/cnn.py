@@ -55,18 +55,12 @@ def load_data(micName, IMG_SIZE_X, IMG_SIZE_Y):
 
             #temp_array = cv2.imread(folderPath+"/"+pic)
             temp_array = load_image(folderPath+"/"+pic)
-            #print(folderPath+"/"+pic)
-            #print(folderPath+"/"+pic);
-            #print(i);
-            #print(pic);
-            #print(temp_array);
-            #if (temp_array != None):
-            
+
         
             if (check_array(temp_array)):
               #temp_array = cv2.resize(temp_array, (IMG_SIZE_Y, IMG_SIZE_X))
               img_array = np.array(temp_array)
-              img_array = images_array / 255
+              img_array = img_array / 255
               images_array[i] = img_array
               #cv2.imshow("win", images_array[i])
               labels_array[i] = label
@@ -105,7 +99,6 @@ image = load_image(str)
 
 x_train, y_train, x_test, y_test = load_data("mic0", IMG_SIZE_X, IMG_SIZE_Y)
 
-x_train, x_test = x_train / 255.0, x_test / 255.0
 
 model = tf.keras.models.Sequential([
   tf.keras.layers.Flatten(input_shape=(IMG_SIZE_X, IMG_SIZE_Y, 3)),
