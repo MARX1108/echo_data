@@ -16,8 +16,8 @@ def split_data(filename):
     return [m_0,m_1]
 
 def writeArrayToFile(folderpath, filename, m_0, m_1):
-    filename_0 = "0-" + filename;
-    filename_1 = "1-" + filename;
+    filename_0 = "0-" + filename
+    filename_1 = "1-" + filename
 
     newfolderpath = folderpath + "/separated"
     #os.mkdir(newfolderpath)
@@ -29,15 +29,15 @@ def writeArrayToFile(folderpath, filename, m_0, m_1):
 
     f = open(newfolderpath+"/mic0/"+filename_0, "w+")
     for i in m_0:
-        f.write(str(i));
-    f.close();
+        f.write(str(i))
+    f.close()
 
     f = open(newfolderpath+"/mic1/"+filename_1, "w+")
     for i in m_1:
-        f.write(str(i));
-    f.close();
+        f.write(str(i))
+    f.close()
 
-    return 0;
+    return 0
 
 
 def separatefile(filePath):
@@ -50,19 +50,19 @@ def separatefile(filePath):
 
     for filename in fileList:
         print(filename)
-        incoming_file_path = filePath + "/" + filename;
+        incoming_file_path = filePath + "/" + filename
         if (filename != "separated"):
             a = split_data(incoming_file_path)
         writeArrayToFile(filePath, filename, a[0], a[1])
 
 
 
-    return 0;
+    return 0
 
 
 
 separatefile("echo4")
 separatefile("echo5_1")
 separatefile("echo5_2")
-print("writing finished");
+
 
