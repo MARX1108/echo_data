@@ -8,9 +8,9 @@ import matplotlib.pyplot as plt
 from matplotlib.image import imread
 from PIL import Image
 
-IMG_SIZE_X = 656
-IMG_SIZE_Y = 875
-#CUDA_VISIBLE_DEVICES=""
+
+IMG_SIZE_X = 437
+IMG_SIZE_Y = 308
 
 config = tf.ConfigProto()
 config.gpu_options.allow_growth = True
@@ -53,11 +53,11 @@ def load_data(micName, IMG_SIZE_X, IMG_SIZE_Y):
                 print(folderPath+"/"+pic) """
 
             #temp_array = cv2.imread(folderPath+"/"+pic)
-            temp_array = load_image(folderPath+"/"+pic)
+            temp_array = crop_img(folderPath+"/"+pic, 329, 25, 791, 584)
 
         
             if (check_array(temp_array)):
-              #temp_array = cv2.resize(temp_array, (IMG_SIZE_Y, IMG_SIZE_X))
+              temp_array = cv2.resize(temp_array, (IMG_SIZE_Y, IMG_SIZE_X))
               img_array = np.array(temp_array)
               img_array = img_array / 255
               images_array[i] = img_array
@@ -67,7 +67,7 @@ def load_data(micName, IMG_SIZE_X, IMG_SIZE_Y):
               
         label += 1
         
-    return images_array[1:2056:2], labels_array[1:2056:2], images_array[0:2056:3], labels_array[0:2056:3]
+    return images_array[200:1800], labels_array[200:1800], images_array[0:2056:3], labels_array[0:2056:3]
 
 def crop_img(filename, left, top, right, bottom):
     im = Image.open(filename) 
@@ -108,7 +108,10 @@ model = tf.keras.models.Sequential([
   tf.keras.layers.Flatten(input_shape=(IMG_SIZE_X, IMG_SIZE_Y, 3)),
   tf.keras.layers.Dense(512, activation=tf.nn.relu),
   tf.keras.layers.Dropout(0.2),
-  tf.keras.layers.Dense(10, activation=tf.nn.softmax)
+  tf.keras.layers.Dense(10, activation=tf.nn.softmax),
+  tf.keras.layers.Dense(64, activation='relu'),
+  tf.keras.layers.Dropout(0.2),
+  tf.keras.layers.Dense(64, activation='softmax')
 ])
 
 print("Model compling")
@@ -116,8 +119,8 @@ model.compile(optimizer='adam',
               loss='sparse_categorical_crossentropy',
               metrics=['accuracy'])
 
-model.fit(x_train, y_train, epochs=1,  batch_size=1)
-model.evaluate(x_test, y_test, batch_size=1)
+model.fit(x_train, y_train, epochs=10,  batch_size=12)
+model.evaluate(x_test, y_test, batch_size=12)
 
 
 print("program finished")
