@@ -55,7 +55,6 @@ def load_data(micName, IMG_SIZE_X, IMG_SIZE_Y):
 
             #temp_array = cv2.imread(folderPath+"/"+pic)
             temp_array = load_image(folderPath+"/"+pic)
-            print(temp_array)
             #print(folderPath+"/"+pic)
             #print(folderPath+"/"+pic);
             #print(i);
@@ -67,6 +66,7 @@ def load_data(micName, IMG_SIZE_X, IMG_SIZE_Y):
             if (check_array(temp_array)):
               #temp_array = cv2.resize(temp_array, (IMG_SIZE_Y, IMG_SIZE_X))
               img_array = np.array(temp_array)
+              img_array = images_array / 255
               images_array[i] = img_array
               #cv2.imshow("win", images_array[i])
               labels_array[i] = label
@@ -78,7 +78,7 @@ def load_data(micName, IMG_SIZE_X, IMG_SIZE_Y):
 
 def crop_img(filename, left, top, right, bottom):
     im = Image.open(filename) 
-    im1 = im.crop((left, top, right, bottom)) 
+    return im.crop((left, top, right, bottom)) 
     #im1.show() 
     #crop_img(folderPath+"/"+pic, 329, 25, 791, 584)
     # 300, 25, 700,650
@@ -118,7 +118,7 @@ model.compile(optimizer='adam',
               loss='sparse_categorical_crossentropy',
               metrics=['accuracy'])
 
-model.fit(x_train, y_train, epochs=5)
+model.fit(x_train, y_train, epochs=1)
 model.evaluate(x_test, y_test)
 
 
