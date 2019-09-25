@@ -9,7 +9,7 @@ from matplotlib.image import imread
 from PIL import Image
 
 IMG_SIZE_X = 656
-IMG_SIZE_Y = 875
+IMG_SIZE_Y = 462
 
 
 
