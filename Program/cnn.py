@@ -7,15 +7,14 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-IMG_SIZE_X = 65
-IMG_SIZE_Y = 87
+IMG_SIZE_X = 656//2
+IMG_SIZE_Y = 875//2
 
 def load_data(micName, IMG_SIZE_X, IMG_SIZE_Y):
-
     this_path = os.getcwd()
     #print(this_path)
 
-    filePath =  this_path + "/Fig/" + micName;
+    filePath =  this_path + "/Fig/" + micName
     folderList = os.listdir(filePath)
     #print(fileList)
     
@@ -26,12 +25,12 @@ def load_data(micName, IMG_SIZE_X, IMG_SIZE_Y):
     labels_array[1082:1082+974] = 5
     #print(images_array)
     #print(labels_array)
-    i = 0;
+    i = 0
 
     for folder in folderList:
         folderPath = filePath + "/" + folder
-        picList = os.listdir(folderPath);
-        picList = [k for k in picList if '.jpg' in k];
+        picList = os.listdir(folderPath)
+        picList = [k for k in picList if '.jpg' in k]
         #print(picList)
         
         for pic in picList:
@@ -45,9 +44,9 @@ def load_data(micName, IMG_SIZE_X, IMG_SIZE_Y):
               temp_array = cv2.resize(temp_array, (IMG_SIZE_Y, IMG_SIZE_X))
               img_array = np.array(temp_array)
               images_array[i] = img_array
-              i = i + 1;
+              i = i + 1
 
-    return images_array[1:2056], labels_array[1:2056], images_array[0:2056:2], labels_array[0:2056:2];
+    return images_array[1:2056], labels_array[1:2056], images_array[0:2056:2], labels_array[0:2056:2]
 
 
 def check_array(x):
@@ -71,7 +70,7 @@ model.compile(optimizer='adam',
               loss='sparse_categorical_crossentropy',
               metrics=['accuracy'])
 
-model.fit(x_train, y_train, epochs=1)
+model.fit(x_train, y_train, epochs=5)
 model.evaluate(x_test, y_test)
 
 
