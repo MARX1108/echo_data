@@ -26,18 +26,18 @@ def load_data(micName, IMG_SIZE_X, IMG_SIZE_Y):
 
     images_array = np.empty((dataset_size,IMG_SIZE_X,IMG_SIZE_Y,3), dtype=float, order='C')
     labels_array = np.empty((dataset_size,1), dtype=float, order='C')
-    labels_array[0:1081] = 4
-    labels_array[1082:1082+974] = 5
+    
+      #labels_array[0:1081] = 4
+      #abels_array[1082:1082+974] = 5
     #print(images_array)
     #print(labels_array)
     i = 0
-
+    label = 4
     for folder in folderList:
         folderPath = filePath + "/" + folder
         picList = os.listdir(folderPath)
         picList = [k for k in picList if '.jpg' in k]
         #print(picList)
-        
         for pic in picList:
             temp_array = cv2.imread(folderPath+"/"+pic)
             crop_img(folderPath+"/"+pic, 329, 25, 791, 584)
@@ -50,8 +50,10 @@ def load_data(micName, IMG_SIZE_X, IMG_SIZE_Y):
               temp_array = cv2.resize(temp_array, (IMG_SIZE_Y, IMG_SIZE_X))
               img_array = np.array(temp_array)
               images_array[i] = img_array
+              labels_array[i] = label
               i = i + 1
-
+        label += 1
+        
     return images_array[1:2056], labels_array[1:2056], images_array[0:2056:2], labels_array[0:2056:2]
 
 def crop_img(filename, left, top, right, bottom):
