@@ -10,15 +10,14 @@ from PIL import Image
 
 IMG_SIZE_X = 656
 IMG_SIZE_Y = 875
+#CUDA_VISIBLE_DEVICES=""
+
+config = tf.ConfigProto()
+config.gpu_options.allow_growth = True
+sess = tf.Session(config=config)
 
 
 
-
-def load_image( infilename ) :
-    img = Image.open( infilename )
-    img.load()
-    data = np.asarray( img, dtype="int32" )
-    return data
 
 def load_data(micName, IMG_SIZE_X, IMG_SIZE_Y):
     this_path = os.getcwd()
@@ -68,7 +67,7 @@ def load_data(micName, IMG_SIZE_X, IMG_SIZE_Y):
               
         label += 1
         
-    return images_array[1:2056], labels_array[1:2056], images_array[0:2056:2], labels_array[0:2056:2]
+    return images_array[1:2056:2], labels_array[1:2056:2], images_array[0:2056:3], labels_array[0:2056:3]
 
 def crop_img(filename, left, top, right, bottom):
     im = Image.open(filename) 
@@ -79,7 +78,12 @@ def crop_img(filename, left, top, right, bottom):
     #width of 27.6 px/ms
     #crop_img(os.getcwd()+"/Fig/mic0/echo4/0-static-148-20190904_072254225977.jpg", 329, 25, 791, 584)
 
-
+def load_image( infilename ) :
+    img = Image.open( infilename )
+    img.crop((329, 25, 791, 584))
+    img.load()
+    data = np.asarray( img, dtype="int32" )
+    return data
 
 def check_array(x):
     try:
@@ -107,12 +111,13 @@ model = tf.keras.models.Sequential([
   tf.keras.layers.Dense(10, activation=tf.nn.softmax)
 ])
 
+print("Model compling")
 model.compile(optimizer='adam',
               loss='sparse_categorical_crossentropy',
               metrics=['accuracy'])
 
-model.fit(x_train, y_train, epochs=1,  batch_size=128)
-model.evaluate(x_test, y_test, batch_size=128)
+model.fit(x_train, y_train, epochs=1,  batch_size=1)
+model.evaluate(x_test, y_test, batch_size=1)
 
 
 print("program finished")
