@@ -1,11 +1,11 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 import sys
-print(sys.version)
 import tensorflow as tf
 import os
 import cv2 
 import numpy as np
 import matplotlib.pyplot as plt
+from PIL import Image
 
 IMG_SIZE_X = 65
 IMG_SIZE_Y = 87
@@ -16,7 +16,7 @@ def load_data(micName, IMG_SIZE_X, IMG_SIZE_Y):
     filePath =  this_path + "/Fig/" + micName
     folderList = os.listdir(filePath)
     #print(fileList)
-    dataset_size = 0;
+    dataset_size = 0
     for folder in folderList:
         folderPath = filePath + "/" + folder
         picList = os.listdir(folderPath)
@@ -40,6 +40,7 @@ def load_data(micName, IMG_SIZE_X, IMG_SIZE_Y):
         
         for pic in picList:
             temp_array = cv2.imread(folderPath+"/"+pic)
+            crop_img(folderPath+"/"+pic, 329, 25, 791, 584)
             #print(folderPath+"/"+pic);
             #print(i);
             #print(pic);
@@ -53,6 +54,14 @@ def load_data(micName, IMG_SIZE_X, IMG_SIZE_Y):
 
     return images_array[1:2056], labels_array[1:2056], images_array[0:2056:2], labels_array[0:2056:2]
 
+def crop_img(filename, left, top, right, bottom):
+    im = Image.open(filename) 
+    im1 = im.crop((left, top, right, bottom)) 
+    #im1.show() 
+    #crop_img(folderPath+"/"+pic, 329, 25, 791, 584)
+    # 300, 25, 700,650
+    #width of 27.6 px/ms
+    #crop_img(os.getcwd()+"/Fig/mic0/echo4/0-static-148-20190904_072254225977.jpg", 329, 25, 791, 584)
 
 def check_array(x):
     try:
@@ -61,7 +70,10 @@ def check_array(x):
     except:
         return False
 
+
 x_train, y_train, x_test, y_test = load_data("mic0", IMG_SIZE_X, IMG_SIZE_Y)
+x_train, y_train, x_test, y_test = load_data("mic0", IMG_SIZE_X, IMG_SIZE_Y)
+
 x_train, x_test = x_train / 255.0, x_test / 255.0
 
 model = tf.keras.models.Sequential([
