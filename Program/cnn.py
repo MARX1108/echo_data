@@ -142,5 +142,8 @@ model.compile(optimizer='adam',
 model.fit(x_train, y_train, epochs=5,  batch_size=12)
 model.evaluate(x_test, y_test, batch_size=12)
 
+predictions = model.predict(x_test)
+
+
 
 print("program finished")
