@@ -34,6 +34,7 @@ out=filtfilt(fil,1,inp);
 f = figure('visible', 'off');
 spectrogram(out(:,1),hanning(256),128,256,fs,'yaxis');
  [~,ps] = spectrogram(out(:,1),[],[],[],fs,'yaxis');
+ mtrix=spectrogram(out(:,1),hanning(256),128,256,fs,'yaxis');
 
 colorbar('off'); 
  

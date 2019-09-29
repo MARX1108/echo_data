@@ -1,4 +1,4 @@
-from __future__ import absolute_import, division, print_function, unicode_literals
+from __future__ import absolute_import, division, print_function
 import sys
 import tensorflow as tf
 import os
@@ -140,10 +140,13 @@ model.compile(optimizer='adam',
               loss='sparse_categorical_crossentropy',
               metrics=['accuracy'])
 
-model.fit(x_train, y_train, epochs=5,  batch_size=12)
+model.fit(x_train, y_train, epochs=1,  batch_size=12)
 model.evaluate(x_test, y_test, batch_size=12)
 
 predictions = model.predict(x_test)
+print(predictions.shape)
+confusion = tf.math.confusion_matrix(y_test,
+    predictions[0])
 
 labels = ['echo4','echo5']
 cm = confusion_matrix(y_test, predictions, labels)
