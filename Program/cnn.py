@@ -144,8 +144,10 @@ model.evaluate(x_test, y_test, batch_size=12)
 
 predictions = model.predict(x_test)
 print(predictions.shape)
+predicted_label = np.argmax(predictions[0])
+
 confusion = tf.math.confusion_matrix(y_test,
-    predictions[0])
+    predicted_label)
 
 print(confusion)
 
