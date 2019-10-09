@@ -15,7 +15,7 @@ IMG_SIZE_X = 437
 IMG_SIZE_Y = 308
 
 x_train, y_train, x_test, y_test = load_data("mic0", IMG_SIZE_X, IMG_SIZE_Y)
-
+print(x_train.shape)
 plt.imshow(x_train[0])
 
 
