@@ -19,8 +19,6 @@ config.gpu_options.allow_growth = True
 sess = tf.Session(config=config)
 
 
-
-
 def load_data(micName, IMG_SIZE_X, IMG_SIZE_Y):
     this_path = os.getcwd()
     #print(this_path)
@@ -104,26 +102,6 @@ image = load_image(str)
 
 
 x_train, y_train, x_test, y_test = load_data("mic0", IMG_SIZE_X, IMG_SIZE_Y)
-
-'''
-model = tf.keras.models.Sequential([
-  tf.keras.layers.Flatten(input_shape=(IMG_SIZE_X, IMG_SIZE_Y, 3)),
-  tf.keras.layers.Dense(512, activation=tf.nn.relu),
-  tf.keras.layers.Dropout(0.2),
-  tf.keras.layers.Dense(512, activation=tf.nn.softmax),
-  tf.keras.layers.Dense(512, activation='relu'),
-  tf.keras.layers.Dropout(0.1),
-  tf.keras.layers.Dense(512, activation='softmax')
-])
-
-print("Model compling")
-model.compile(optimizer='adam',
-              loss='sparse_categorical_crossentropy',
-              metrics=['accuracy'])
-
-model.fit(x_train, y_train, epochs=5,  batch_size=12)
-model.evaluate(x_test, y_test, batch_size=12)
-'''
 
 
 model = models.Sequential()
