@@ -1,5 +1,5 @@
 import os
-
+import fnmatch
 def split_data(filename):
     f= open(filename,"r")
     m_0=[] #data from one microphone
@@ -42,11 +42,13 @@ def writeArrayToFile(folderpath, filename, m_0, m_1):
 
 def separatefile(filePath):
 
-    filePath = "../" + filePath
+    filePath = "./" + filePath
     fileList = os.listdir(filePath)
     for filename in fileList:
-        if filename != "*.txt" :
+        if not (fnmatch.fnmatch(filename, '*.txt')):
+            # print("not access",filename)
             fileList.remove(filename)
+
 
     for filename in fileList:
         print(filename)
@@ -60,8 +62,7 @@ def separatefile(filePath):
     return 0
 
 
-
-separatefile("echo4")
+#separatefile("echo4")
 #separatefile("echo5_1")
 #separatefile("echo5_2")
 separatefile("echo1")
