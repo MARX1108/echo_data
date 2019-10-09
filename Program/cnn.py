@@ -8,7 +8,8 @@ import matplotlib.pyplot as plt
 from matplotlib.image import imread
 from PIL import Image
 from tensorflow.keras import datasets, layers, models
-from sklearn.metrics import confusion_matrix 
+#from sklearn.metrics import confusion_matrix 
+
 
 
 IMG_SIZE_X = 437
@@ -17,8 +18,6 @@ IMG_SIZE_Y = 308
 config = tf.ConfigProto()
 config.gpu_options.allow_growth = True
 sess = tf.Session(config=config)
-
-
 
 
 def load_data(micName, IMG_SIZE_X, IMG_SIZE_Y):
@@ -97,33 +96,13 @@ def check_array(x):
 
 
 
-str = os.getcwd() + "\Fig\mic0\echo5/0-static-977-2019y9m8d21h45m17s37.280242lat-80.474363long.jpg"
-open(str)
-print(str)
-image = load_image(str)
-
+#str = os.getcwd() + "\Fig\mic0\echo5/0-static-977-2019y9m8d21h45m17s37.280242lat-80.474363long.jpg"
+#open(str)
+#print(str)
+#image = load_image(str)
+""" 
 
 x_train, y_train, x_test, y_test = load_data("mic0", IMG_SIZE_X, IMG_SIZE_Y)
-
-'''
-model = tf.keras.models.Sequential([
-  tf.keras.layers.Flatten(input_shape=(IMG_SIZE_X, IMG_SIZE_Y, 3)),
-  tf.keras.layers.Dense(512, activation=tf.nn.relu),
-  tf.keras.layers.Dropout(0.2),
-  tf.keras.layers.Dense(512, activation=tf.nn.softmax),
-  tf.keras.layers.Dense(512, activation='relu'),
-  tf.keras.layers.Dropout(0.1),
-  tf.keras.layers.Dense(512, activation='softmax')
-])
-
-print("Model compling")
-model.compile(optimizer='adam',
-              loss='sparse_categorical_crossentropy',
-              metrics=['accuracy'])
-
-model.fit(x_train, y_train, epochs=5,  batch_size=12)
-model.evaluate(x_test, y_test, batch_size=12)
-'''
 
 
 model = models.Sequential()
@@ -142,7 +121,7 @@ model.compile(optimizer='adam',
 
 model.fit(x_train, y_train, epochs=1,  batch_size=12)
 model.evaluate(x_test, y_test, batch_size=12)
-
+model.save("ep-1_bs-12.h5")
 predictions = model.predict(x_test,verbose=1)
 
 print(predictions)
@@ -169,3 +148,4 @@ plt.ylabel('True')
 plt.show()
 
 print("program finished")
+ """
