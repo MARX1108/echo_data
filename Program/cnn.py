@@ -8,7 +8,12 @@ import matplotlib.pyplot as plt
 from matplotlib.image import imread
 from PIL import Image
 from tensorflow.keras import datasets, layers, models
+<<<<<<< HEAD
 from tensorflow import keras
+=======
+from sklearn.metrics import confusion_matrix 
+
+>>>>>>> ec12cd4974eeac320a423471f45f16feb4d86ac9
 
 IMG_SIZE_X = 437
 IMG_SIZE_Y = 308
@@ -154,6 +159,17 @@ print(y_classes.shape)
 #confusion = tf.math.confusion_matrix(y_test,
    # predictions)
 
-#print(confusion)
+labels = ['echo4','echo5']
+cm = confusion_matrix(y_test, predictions, labels)
+fig = plt.figure()
+ax = fig.add_subplot(111)
+cax = ax.matshow(cm)
+plt.title('Confusion matrix of the classifier')
+fig.colorbar(cax)
+ax.set_xticklabels([''] + labels)
+ax.set_yticklabels([''] + labels)
+plt.xlabel('Predicted')
+plt.ylabel('True')
+plt.show()
 
 print("program finished")
