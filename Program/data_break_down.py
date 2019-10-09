@@ -42,7 +42,7 @@ def writeArrayToFile(folderpath, filename, m_0, m_1):
 
 def separatefile(filePath):
 
-    filePath = "../" + filePath
+    filePath = "./" + filePath
     fileList = os.listdir(filePath)
     for filename in fileList:
         if filename != "*.txt" :
@@ -61,7 +61,7 @@ def separatefile(filePath):
 
 
 
-separatefile("echo4")
+#separatefile("echo4")
 #separatefile("echo5_1")
 #separatefile("echo5_2")
 separatefile("echo1")
