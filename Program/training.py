@@ -17,6 +17,10 @@ IMG_SIZE_Y = 308
 x_train, y_train, x_test, y_test = load_data("mic0", IMG_SIZE_X, IMG_SIZE_Y)
 print(x_train.shape)
 plt.imshow(x_train[0])
+print(y_train[4])
+
+y_train = tf.keras.utils.to_categorical(y_train)
+y_test = tf.keras.utils.to_categorical(y_test)
 
 
 model = models.Sequential()

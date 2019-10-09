@@ -47,12 +47,6 @@ def load_data(micName, IMG_SIZE_X, IMG_SIZE_Y):
         picList = [k for k in picList if '.jpg' in k]
         #print(picList)
         for pic in picList:
-            
-            """ if os.path.exists(folderPath+"/"+pic):
-                print("pass")
-            else:
-                print(folderPath+"/"+pic) """
-
             #temp_array = cv2.imread(folderPath+"/"+pic)
             temp_array = crop_img(folderPath+"/"+pic, 329, 25, 791, 584)
 
