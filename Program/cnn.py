@@ -8,12 +8,8 @@ import matplotlib.pyplot as plt
 from matplotlib.image import imread
 from PIL import Image
 from tensorflow.keras import datasets, layers, models
-<<<<<<< HEAD
-from tensorflow import keras
-=======
 from sklearn.metrics import confusion_matrix 
 
->>>>>>> ec12cd4974eeac320a423471f45f16feb4d86ac9
 
 IMG_SIZE_X = 437
 IMG_SIZE_Y = 308
