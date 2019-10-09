@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 from matplotlib.image import imread
 from PIL import Image
 from tensorflow.keras import datasets, layers, models
-
+from tensorflow import keras
 
 IMG_SIZE_X = 437
 IMG_SIZE_Y = 308
@@ -142,13 +142,18 @@ model.compile(optimizer='adam',
 model.fit(x_train, y_train, epochs=1,  batch_size=12)
 model.evaluate(x_test, y_test, batch_size=12)
 
-predictions = model.predict(x_test)
-print(predictions.shape)
-predicted_label = np.argmax(predictions[0])
+predictions = model.predict(x_test,verbose=1)
 
-confusion = tf.math.confusion_matrix(y_test,
-    predicted_label)
+print(predictions)
+y_prob = model.predict(x_test) 
+y_classes = y_prob.argmax(axis=-1)
 
-print(confusion)
+#y_classes = model.predict_classes(x_test)
+print(y_classes)
+print(y_classes.shape)
+#confusion = tf.math.confusion_matrix(y_test,
+   # predictions)
+
+#print(confusion)
 
 print("program finished")
