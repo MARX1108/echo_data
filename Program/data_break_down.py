@@ -62,7 +62,11 @@ def separatefile(filePath):
 
 
 separatefile("echo4")
-separatefile("echo5_1")
-separatefile("echo5_2")
+#separatefile("echo5_1")
+#separatefile("echo5_2")
+separatefile("echo1")
+separatefile("echo2")
+separatefile("echo3")
+
 
 
