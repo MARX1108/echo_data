@@ -38,6 +38,7 @@ def load_data(micName, IMG_SIZE_X, IMG_SIZE_Y):
     labels_array = np.empty((dataset_size,1), dtype=float, order='C')
     
 
+
     i = 0
     label = 4
     for folder in folderList:
