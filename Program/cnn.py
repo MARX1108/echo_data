@@ -23,7 +23,10 @@ sess = tf.Session(config=config)
 def load_data(micName, IMG_SIZE_X, IMG_SIZE_Y):
     this_path = os.getcwd()
     #print(this_path)
+
     filePath =  this_path + "/Fig/" + micName
+    #print(filePath)
+    #filePath =  "/Fig/" + micName
     folderList = os.listdir(filePath)
     #print(fileList)
     dataset_size = 0
