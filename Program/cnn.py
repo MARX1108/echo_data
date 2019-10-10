@@ -8,7 +8,8 @@ import matplotlib.pyplot as plt
 from matplotlib.image import imread
 from PIL import Image
 from tensorflow.keras import datasets, layers, models
-from sklearn.metrics import confusion_matrix 
+#from sklearn.metrics import confusion_matrix 
+
 
 
 IMG_SIZE_X = 437
@@ -37,6 +38,7 @@ def load_data(micName, IMG_SIZE_X, IMG_SIZE_Y):
     labels_array = np.empty((dataset_size,1), dtype=float, order='C')
     
 
+
     i = 0
     label = 4
     for folder in folderList:
@@ -46,12 +48,6 @@ def load_data(micName, IMG_SIZE_X, IMG_SIZE_Y):
         picList = [k for k in picList if '.jpg' in k]
         #print(picList)
         for pic in picList:
-            
-            """ if os.path.exists(folderPath+"/"+pic):
-                print("pass")
-            else:
-                print(folderPath+"/"+pic) """
-
             #temp_array = cv2.imread(folderPath+"/"+pic)
             temp_array = crop_img(folderPath+"/"+pic, 329, 25, 791, 584)
 
@@ -95,11 +91,11 @@ def check_array(x):
 
 
 
-str = os.getcwd() + "\Fig\mic0\echo5/0-static-977-2019y9m8d21h45m17s37.280242lat-80.474363long.jpg"
-open(str)
-print(str)
-image = load_image(str)
-
+#str = os.getcwd() + "\Fig\mic0\echo5/0-static-977-2019y9m8d21h45m17s37.280242lat-80.474363long.jpg"
+#open(str)
+#print(str)
+#image = load_image(str)
+""" 
 
 x_train, y_train, x_test, y_test = load_data("mic0", IMG_SIZE_X, IMG_SIZE_Y)
 
@@ -120,7 +116,7 @@ model.compile(optimizer='adam',
 
 model.fit(x_train, y_train, epochs=1,  batch_size=12)
 model.evaluate(x_test, y_test, batch_size=12)
-
+model.save("ep-1_bs-12.h5")
 predictions = model.predict(x_test,verbose=1)
 
 print(predictions)
@@ -147,3 +143,4 @@ plt.ylabel('True')
 plt.show()
 
 print("program finished")
+ """
