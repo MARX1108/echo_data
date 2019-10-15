@@ -7,7 +7,7 @@ from cnn import load_data
 IMG_SIZE_X = 437
 IMG_SIZE_Y = 308
 
-model = models.load_model("ep-1_bs-12.h5")
+model = models.load_model("200.h5")
 x_train, y_train, x_test, y_test = load_data("mic0", IMG_SIZE_X, IMG_SIZE_Y)
-predictions = model.predict(x_test)
+predictions = model.predict(x_train)
 print(predictions)
